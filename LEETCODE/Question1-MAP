@@ -1,0 +1,47 @@
+
+
+const products = [
+  { id: 1, name: "Widget", price: 50, quantity: 120 },
+  { id: 2, name: "Gadget", price: 30, quantity: 80 },
+  { id: 3, name: "Doohickey", price: 100, quantity: 200 },
+  { id: 4, name: "Thingamajig", price: 75, quantity: 90 },
+];
+
+// Use parentheses () for objects
+// const updatedProducts = products.map((prod) => ({
+//     ...prod,
+//     price: prod.quantity > 100 ? prod.price*0.9 : prod.price
+// }));
+// console.log(updatedProducts);
+
+
+
+const updatedProducts = products.map(prod => {
+    if(prod.quantity > 100) return { ...prod, price: prod.price*0.9};
+    else return prod;
+})
+
+console.log(updatedProducts);
+
+
+//Using Filter: Create a new array containing only the products that received the discount 
+// (i.e. where the discounted price is less than the original price).
+
+// const discountedProducts = updatedProducts.filter(prod => prod.price < products.find(p => p.id === prod.id).price);
+
+const discountedProd = updatedProducts.filter((prod, index) => {
+    const origPrice = products[index].price;
+    return prod.price < origPrice;
+})
+
+console.log(discountedProd);
+
+
+// 1.3: using forEach: Log a message for each discounted product showing the product name and its new price
+// const logDiscountedProducts = discountedProd.forEach(prod => {
+//     console.log(`Product Name: ${prod.name}, New Price: ${prod.price}`);
+// })
+
+discountedProd.forEach(prod =>{
+    console.log(prod.name, prod.price);
+})
